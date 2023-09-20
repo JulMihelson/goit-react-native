@@ -1,7 +1,7 @@
 import backgroundImage from "../assets/images/background-image.jpg";
 import backgroundImage2x from "../assets/images/background-image2x.jpg";
 
-import React from "react";
+import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import {
   StyleSheet,
@@ -9,9 +9,23 @@ import {
   View,
   ImageBackground,
   TextInput,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Pressable,
+  Keyboard,
+  Button,
 } from "react-native";
 
 export const LoginScreen = () => {
+  // const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const login = () => {
+    console.log(email, password, "user details");
+    // setLogin("");
+    setEmail("");
+    setPassword("");
+  };
   const [fontsLoaded] = useFonts({
     "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
@@ -21,29 +35,52 @@ export const LoginScreen = () => {
     return null;
   }
   return (
-    <ImageBackground
-      imageStyle={styles.background}
-      source={(backgroundImage, backgroundImage2x)}
-    >
-      <View style={styles.logCard}>
-        <View style={styles.avatar}></View>
+    <View>
+      <ImageBackground
+        imageStyle={styles.background}
+        source={(backgroundImage, backgroundImage2x)}
+      >
+        <View style={styles.box}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.logCard}>
+              <KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+                style={{ alignItems: "center" }}
+              >
+                <View style={styles.avatar}></View>
 
-        <View style={styles.form}>
-          <Text style={styles.title}>Увійти</Text>
+                <View style={styles.form}>
+                  <Text style={styles.title}>Увійти</Text>
 
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            style={styles.input}
-          />
+                  <TextInput
+                    placeholder="Адреса електронної пошти"
+                    style={styles.input}
+                  />
+                  <View>
+                    <TextInput placeholder="Пароль" style={styles.passInput} />
+                    <Text style={styles.showPass}>Показати</Text>
+                  </View>
+                </View>
+              </KeyboardAvoidingView>
+              <Button
+                onPress={login}
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? "#FF8833" : "#FF6C00",
+                  },
+                  styles.buttonReg,
+                ]}
+                title="Зареєстуватися"
+              >
+                Зареєстуватися
+              </Button>
 
-          <TextInput placeholder="Пароль" style={styles.passInput} />
-          <Text style={styles.showPass}>Показати</Text>
+              <Text style={styles.haveAcc}>Немає акаунту? Зареєстуватися</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-        <Text style={styles.buttonReg}>Увійти</Text>
-
-        <Text style={styles.haveAcc}>Немає акаунту? Зареєстуватися</Text>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </View>
   );
 };
 
@@ -51,9 +88,11 @@ const styles = StyleSheet.create({
   background: {
     height: "100%",
     width: "100%",
+  },
+  box: {
+    height: "100%",
     justifyContent: "flex-end",
   },
-
   title: {
     color: "#212121",
     textAlign: "center",
@@ -69,10 +108,10 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 16,
     position: "absolute",
-    top: -60,
+    top: -150,
   },
   logCard: {
-    marginTop: 323,
+    height: 489,
     alignItems: "center",
     color: "fff",
     backgroundColor: "#fff",
@@ -112,15 +151,15 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     fontSize: 16,
     position: "absolute",
-    top: 131,
+    top: 16,
     right: 16,
     lineHeight: 19,
   },
   buttonReg: {
-    marginBottom: 16,
+    width: "100%",
     alignItems: "center",
     width: "100%",
-    paddingVertical: 16,
+    paddingVertical: 8,
     paddingHorizontal: 32,
     backgroundColor: "#FF6C00",
     borderRadius: 100,
@@ -136,6 +175,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     color: "#1B4371",
     marginBottom: 45,
+    marginTop: 16,
   },
 });
 export default LoginScreen;

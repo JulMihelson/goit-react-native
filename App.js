@@ -4,8 +4,8 @@ import LoginScreen from "./Screens/LoginScreen";
 export default function App() {
   return (
     <View>
-      {/* <RegScreen /> */}
-      <LoginScreen />
+      <RegScreen />
+      {/* <LoginScreen /> */}
     </View>
   );
 }
