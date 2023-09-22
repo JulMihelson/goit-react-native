@@ -1,6 +1,6 @@
 import backgroundImage from "../assets/images/background-image.jpg";
 import backgroundImage2x from "../assets/images/background-image2x.jpg";
-
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import {
@@ -17,10 +17,13 @@ import {
   Button,
 } from "react-native";
 
-export const RegScreen = () => {
+export const RegistrationScreen = () => {
+  const navigation = useNavigation();
+
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const register = () => {
     console.log(login, email, password, "user details");
     setLogin("");
@@ -37,7 +40,7 @@ export const RegScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       <ImageBackground
         imageStyle={styles.background}
         source={(backgroundImage, backgroundImage2x)}
@@ -76,19 +79,17 @@ export const RegScreen = () => {
                   </View>
                 </View>
               </KeyboardAvoidingView>
-
               <Button
                 onPress={register}
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed ? "#FF8833" : "#FF6C00",
-                  },
-                  styles.buttonReg,
-                ]}
+                style={styles.buttonRegistration}
                 title="Зареєстуватися"
               ></Button>
-
-              <Text style={styles.haveAcc}>Вже є акаунт? Увійти</Text>
+              <View style={styles.haveAcc}>
+                <Text>Вже є акаунт? </Text>
+                <Text onPress={() => navigation.navigate("LoginScreen")}>
+                  Увійти
+                </Text>
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -171,6 +172,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
   buttonReg: {
+    backgroundColor: "#FF8833",
     width: "100%",
     paddingVertical: 8,
     paddingHorizontal: 32,
@@ -180,6 +182,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   haveAcc: {
+    flexDirection: "row",
     textAlign: "center",
     fontFamily: "Roboto-Regular",
     fontSize: 16,
@@ -189,4 +192,4 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-export default RegScreen;
+export default RegistrationScreen;

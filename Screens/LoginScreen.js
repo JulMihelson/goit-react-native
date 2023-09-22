@@ -1,6 +1,6 @@
 import backgroundImage from "../assets/images/background-image.jpg";
 import backgroundImage2x from "../assets/images/background-image2x.jpg";
-
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import {
@@ -17,20 +17,24 @@ import {
 } from "react-native";
 
 export const LoginScreen = () => {
-  // const [login, setLogin] = useState("");
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const login = () => {
-    console.log(email, password, "user details");
-    // setLogin("");
+    const loggedUser = { password, email };
     setEmail("");
     setPassword("");
+    navigation.navigate("Home");
   };
+
   const [fontsLoaded] = useFonts({
     "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
     "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
   });
+
   if (!fontsLoaded) {
     return null;
   }
@@ -70,12 +74,17 @@ export const LoginScreen = () => {
                   },
                   styles.buttonReg,
                 ]}
-                title="Зареєстуватися"
+                title="Увійти"
               >
-                Зареєстуватися
+                Увійти
               </Button>
 
-              <Text style={styles.haveAcc}>Немає акаунту? Зареєстуватися</Text>
+              <View style={styles.haveAcc}>
+                <Text>Немає акаунту? </Text>
+                <Text onPress={() => navigation.navigate("RegistrationScreen")}>
+                  Зареєстуватися
+                </Text>
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -169,6 +178,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   haveAcc: {
+    flexDirection: "row",
     textAlign: "center",
     fontFamily: "Roboto-Regular",
     fontSize: 16,
