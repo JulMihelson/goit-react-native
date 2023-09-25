@@ -15,15 +15,20 @@ import {
   Keyboard,
   Button,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUsers } from "../redux/Users/selecrotsUsers";
+import { loginFirebaseThunk } from "../redux/Auth/operations";
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const users = useSelector(selectUsers);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const login = () => {
-    const loggedUser = { password, email };
+    dispatch(loginFirebaseThunk({ email, password }));
     setEmail("");
     setPassword("");
     navigation.navigate("Home");

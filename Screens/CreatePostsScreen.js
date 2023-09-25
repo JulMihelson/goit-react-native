@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { AntDesign } from "@expo/vector-icons";
+// import { useDispatch } from "react-redux";
 
 const CreatePostsScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);

@@ -16,15 +16,20 @@ import {
   Platform,
   Button,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { registrationThunkFirebaseDb } from "../redux/Auth/operations";
 
 export const RegistrationScreen = () => {
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const register = () => {
+    dispatch(
+      registrationThunkFirebaseDb({ displayName: login, email, password })
+    );
     console.log(login, email, password, "user details");
     setLogin("");
     setEmail("");
