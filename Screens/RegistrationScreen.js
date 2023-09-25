@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
   },
 
   form: { gap: 12 },
+
   input: {
     backgroundColor: "#F6F6F6",
     padding: 16,
