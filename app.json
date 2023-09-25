@@ -13,7 +13,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.goit.awesomeproject",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBFOjiXNeAE70PDxLe8lyt1ZsWmmZDKJAM"
+      }
     },
     "android": {
       "adaptiveIcon": {

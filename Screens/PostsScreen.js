@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import avatarImage from "../assets/images/avatar-image.jpg";
 import avatarImage2x from "../assets/images/avatar-image2x.jpg";
-
 import { useFonts } from "expo-font";
 
 const PostsScreen = () => {

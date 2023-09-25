@@ -10,6 +10,7 @@ import "react-native-gesture-handler";
 import LogOut from "./Components/LogOut";
 import Home from "./Screens/Home";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import MapScreen from "./Screens/MapScreen";
 
 const MainStack = createStackNavigator();
 export default function App() {
@@ -25,6 +26,14 @@ export default function App() {
           name="LoginScreen"
           component={LoginScreen}
           options={{ headerShown: false }}
+        />
+        <MainStack.Screen
+          name="MapScreen"
+          component={MapScreen}
+          options={{
+            title: "Геолокація",
+            headerTitleAlign: "center",
+          }}
         />
         <MainStack.Screen
           name="Home"
@@ -59,33 +68,5 @@ export default function App() {
         />
       </MainStack.Navigator>
     </NavigationContainer>
-    // <NavigationContainer>
-    //   <MainStack.Navigator>
-    //     {/* <MainStack.Screen name="Registration" component={RegScreen} />
-    //     <MainStack.Screen name="Login" component={LoginScreen} /> */}
-    //     {/* <MainStack.Screen name="Home" component={Home} /> */}
-    //     <MainStack.Screen
-    //       name="Публікації"
-    //       component={PostsScreen}
-    //       options={{
-    //         headerTintColor: { color: "#212121" },
-    //         headerStyle: {
-    //           paddingHorizontal: 16,
-    //         },
-    //         headerTitleStyle: {
-    //           textAlign: "center",
-    //           fontSize: 17,
-    //           fontWeight: 500,
-    //           letterSpacing: 0.3,
-    //           fontFamily: "Roboto-Bold",
-    //         },
-    //         headerRight: () => <LogOut />,
-    //       }}
-    //     />
-    //     {/* <RegScreen name={login} email={email} /> */}
-    //     {/* <PostsScreen /> */}
-    //     {/* <LoginScreen /> */}
-    //   </MainStack.Navigator>
-    // </NavigationContainer>
   );
 }

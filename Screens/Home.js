@@ -22,14 +22,14 @@ export const Home = () => {
           }
           return <Ionicons name={iconName} size={24} color={"green"} />;
         },
+        tabBarOptions: {
+          justifyContent: "center",
+          alignItems: "center",
+          height: 83,
+          activeColor: "#f0edf6",
+          inactiveColor: "#3e2465",
+        },
       })}
-      tabBarOptions={{
-        justifyContent: "center",
-        alignItems: "center",
-        height: 83,
-        activeColor: "#f0edf6",
-        inactiveColor: "#3e2465",
-      }}
     >
       <Tabs.Screen
         name="Posts"
