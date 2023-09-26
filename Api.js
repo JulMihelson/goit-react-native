@@ -78,7 +78,7 @@ export const Login = (data) => {
     return null;
   }
 
-  return { email: user.email, login: user.login, url: user.url };
+  return { email: user.email, displayName: user.displayName, url: user.url };
 };
 
 export const LogOut = () => {

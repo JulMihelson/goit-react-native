@@ -51,23 +51,19 @@ const authSlice = createSlice({
 });
 // /updateUserProfileThunk
 
-function loginFirebaseFulfilled(state, { payload }) {
-  state.isLoading = false;
-  state.currentUser = payload;
-  state.currentUserFirebase = payload;
-  state.isError = null;
-}
-
 function logOutFulfilled(state, { payload }) {
   state.isLoading = false;
   state.currentUser = payload;
   state.currentUserFirebase = payload;
   state.isError = null;
 }
-
 function registrationThunkFirebaseDbFulfilled(state, { payload }) {
   state.isLoading = false;
-  state.currentUser = payload;
+  state.currentUserFirebase = payload;
+  state.isError = null;
+}
+function loginFirebaseFulfilled(state, { payload }) {
+  state.isLoading = false;
   state.currentUserFirebase = payload;
   state.isError = null;
 }

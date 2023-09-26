@@ -7,19 +7,47 @@ import {
   TextInput,
   Pressable,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { AntDesign } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addPostThunk } from "../redux/Posts/operations";
+import { selectUsers } from "../redux/Users/selecrotsUsers";
+import { useNavigation } from "@react-navigation/native";
+import PostsScreen from "./PostsScreen";
 // import { useDispatch } from "react-redux";
 
-const CreatePostsScreen = ({ navigation }) => {
+const CreatePostsScreen = () => {
+  const dispatch = useDispatch();
+  const { uid: userId } = useSelector(selectUsers);
+  const [image, setImage] = useState(null);
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState(null);
   const [hasPermission, setHasPermission] = useState(null);
   const cameraRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [photo, setPhoto] = useState();
+  const navigation = useNavigation();
+  const onSubmit = async () => {
+    setIsLoading(true);
+    try {
+      const newPost = await onPostCreate({ ...location, image, userId, name });
+      dispatch(addPostThunk(newPost));
+      setImage(null);
+      setName("");
+      setLocation(null);
+      navigation.navigate("Posts");
+    } catch (error) {
+      Alert.alert("Error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -46,7 +74,14 @@ const CreatePostsScreen = ({ navigation }) => {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
-
+  const handleCreate = async () => {
+    setPhoto(null);
+    try {
+      navigation.navigate("Posts");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.cameraContainer}>
@@ -93,12 +128,14 @@ const CreatePostsScreen = ({ navigation }) => {
       >
         <View style={styles.textInputs}>
           <TextInput
+            onChangeText={(value) => setName(value)}
             style={styles.inputName}
             keyboardType="default"
             placeholder="Назва..."
           />
           <TextInput style={styles.inputLocation} placeholder="Місцевість..." />
           <Text
+            onChangeText={(value) => setLocation(value)}
             style={styles.mapIcon}
             onPress={() => {
               navigation.navigate("MapScreen");
@@ -110,7 +147,7 @@ const CreatePostsScreen = ({ navigation }) => {
       </KeyboardAvoidingView>
 
       <Pressable
-        onPress={console.log("publish")}
+        onPress={handleCreate}
         style={({ pressed }) => [
           {
             backgroundColor: pressed ? "#FF6C00" : "#F6F6F6",

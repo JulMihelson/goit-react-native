@@ -1,10 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore } from "redux-persist";
-// import rootReducer from "../redux/Root/sliceRoot";
-
 import "react-native-gesture-handler";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import RegistrationScreen from "../Screens/RegistrationScreen";
@@ -13,6 +9,7 @@ import MapScreen from "../Screens/MapScreen";
 import Home from "../Screens/Home";
 import LoginScreen from "../Screens/LoginScreen";
 import LogOut from "./LogOut";
+import PostsScreen from "../Screens/PostsScreen";
 
 const MainStack = createStackNavigator();
 
@@ -46,6 +43,7 @@ export const MainComponent = () => {
             headerTitleAlign: "center",
           }}
         />
+
         <MainStack.Screen
           name="Home"
           component={Home}

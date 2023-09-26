@@ -27,11 +27,10 @@ export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = () => {
+  const onSubmit = () => {
     dispatch(loginFirebaseThunk({ email, password }));
-    setEmail("");
-    setPassword("");
-    navigation.navigate("Home");
+    setEmail(null);
+    setPassword(null);
   };
 
   const [fontsLoaded] = useFonts({
@@ -72,7 +71,7 @@ export const LoginScreen = () => {
                 </View>
               </KeyboardAvoidingView>
               <Button
-                onPress={login}
+                onPress={onSubmit}
                 style={({ pressed }) => [
                   {
                     backgroundColor: pressed ? "#FF8833" : "#FF6C00",

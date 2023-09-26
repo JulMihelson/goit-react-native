@@ -11,8 +11,12 @@ import {
 import avatarImage from "../assets/images/avatar-image.jpg";
 import avatarImage2x from "../assets/images/avatar-image2x.jpg";
 import { useFonts } from "expo-font";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentUser } from "../redux/Auth/selectorsAuth";
 
 const PostsScreen = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser);
   const [fontsLoaded] = useFonts({
     "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
@@ -32,8 +36,8 @@ const PostsScreen = () => {
               source={(avatarImage, avatarImage2x)}
             ></Image>
             <View style={styles.userInfo}>
-              <Text style={styles.login}>Natali Romanova</Text>
-              <Text style={styles.email}>email@example.com</Text>
+              <Text style={styles.login}>{user.login}</Text>
+              <Text style={styles.email}>{user.email}</Text>
             </View>
           </View>
         </View>

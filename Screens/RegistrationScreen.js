@@ -22,18 +22,18 @@ import { registrationThunkFirebaseDb } from "../redux/Auth/operations";
 export const RegistrationScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [login, setLogin] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const register = () => {
+  const onSubmit = () => {
     dispatch(
       registrationThunkFirebaseDb({ displayName: login, email, password })
     );
-    console.log(login, email, password, "user details");
-    setLogin("");
-    setEmail("");
-    setPassword("");
+
+    setLogin(null);
+    setEmail(null);
+    setPassword(null);
   };
   const [fontsLoaded] = useFonts({
     "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
@@ -62,8 +62,8 @@ export const RegistrationScreen = () => {
                 <View style={styles.form}>
                   <Text style={styles.title}>Реєстрація</Text>
                   <TextInput
-                    onChangeText={setLogin}
-                    value={login}
+                    onChangeText={setDisplayName}
+                    value={displayName}
                     placeholder="Логін"
                     style={styles.input}
                   />
@@ -85,7 +85,7 @@ export const RegistrationScreen = () => {
                 </View>
               </KeyboardAvoidingView>
               <Button
-                onPress={register}
+                onPress={onSubmit}
                 style={styles.buttonRegistration}
                 title="Зареєстуватися"
               ></Button>

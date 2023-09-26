@@ -1,14 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   LogOut,
-  Login,
   Registration,
   loginDB,
   registerDB,
   updateUserProfile,
 } from "../../Api";
 
-export const loginThunk = createAsyncThunk("auth/login", Login);
+export const loginThunk = createAsyncThunk("auth/login", loginDB);
 
 export const loginFirebaseThunk = createAsyncThunk(
   "auth/loginFirebaseThunk",
